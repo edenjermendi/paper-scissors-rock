@@ -1,3 +1,21 @@
+//VISUAL HTML CONSOLE LOG (copypasted from prior project)
+// Keep original console.log behavior
+const originalLog = console.log;
+
+// Custom console output function
+function logToCustomConsole(message) {
+  const consoleDiv = document.getElementById("console");
+  const newLine = document.createElement("div");
+  newLine.textContent = message;
+  consoleDiv.appendChild(newLine);
+}
+
+// Override console.log
+console.log = function (...args) {
+  originalLog(...args); // still logs in DevTools
+  args.forEach(arg => logToCustomConsole(arg));
+};
+
 //Randomly generated computer choice generated rock, paper or scissors
 function getComputerChoice() {
     const randomNum = Math.random();
@@ -62,14 +80,16 @@ function playGame() {
     }
 } 
 
+//call above function
 playGame();
 
+//advise user who won the game overall
 if (humanScore > computerScore) {
   console.log("You won the game!");
 } else if (computerScore > humanScore) {
   console.log("Computer won the game!");
 } else {
-  console.log("It's a tie!");
+  console.log("It's a tie! Refresh page to play again.");
 }
 
 
