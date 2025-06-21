@@ -1,13 +1,16 @@
-const randomNum = Math.random();
+function getComputerChoice() {
+    const randomNum = Math.random();
+    console.log(randomNum);
 
 if (randomNum <= 0.33) {
-    return "Paper"
+    return "Paper";
 } else if (randomNum > 0.33 && randomNum <= 0.66) {
-    return "Scissors"
+    return "Scissors";
 } else {
-    return "Rock"
+    return "Rock";
+}
 }
 
-function getComputerChoice() {
-    return 
-};
+
+
+
