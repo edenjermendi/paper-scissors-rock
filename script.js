@@ -4,11 +4,11 @@ function getComputerChoice() {
     console.log(randomNum);
 
 if (randomNum <= 0.33) {
-    return "Paper";
+    return "paper";
 } else if (randomNum > 0.33 && randomNum <= 0.66) {
-    return "Scissors";
+    return "scissors";
 } else {
-    return "Rock";
+    return "rock";
 }
 };
 
