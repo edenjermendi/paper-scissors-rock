@@ -1,7 +1,6 @@
 //Randomly generated computer choice generated rock, paper or scissors
 function getComputerChoice() {
     const randomNum = Math.random();
-    console.log(randomNum);
 
 if (randomNum <= 0.33) {
     return "paper";
@@ -27,41 +26,51 @@ function deCapitalize(humanChoice) {
     return humanChoice.toLowerCase();
 }
 
-//Prep both values for playRound function
-const humanSelection = deCapitalize(getHumanChoice());
-const computerSelection = getComputerChoice();
-
-//
+//Add function and logic for a single round
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        return "It's a tie!";
+        return "Round: It's a tie!";
     } else if (humanChoice === "rock" && computerChoice === "paper") {
         computerScore++;
-        return "Computer wins!";
+        return "Round: Computer wins!";
     } else if (humanChoice === "rock" && computerChoice === "scissors") {
         humanScore++;
-        return "You win!";
+        return "Round: You win!";
     } else if (humanChoice === "paper" && computerChoice === "rock") {
         humanScore++;
-        return "You win!";
+        return "Round: You win!";
     } else if (humanChoice === "paper" && computerChoice === "scissors") {
         computerScore++;
-        return "Computer wins!";
+        return "Round: Computer wins!";
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
         humanScore++;
-        return "You win!";
+        return "Round: You win!";
     } else if (humanChoice === "scissors" && computerChoice === "rock") {
         computerScore++;
-        return "Computer wins";
+        return "Round: Computer wins";
     } else {
         return "Try again.."
     }
 }
 
-//testing
-console.log(playRound(humanSelection, computerSelection));
-console.log("Human:", humanScore, "Computer:", computerScore);
+//Add function and logic to play 5 rounds to make full game
+function playGame() {
+    for (let x = 0; x < 5; x++) {
+        let humanChoice = deCapitalize(getHumanChoice());
+        let computerChoice = getComputerChoice();
+        console.log(playRound(humanChoice, computerChoice));
+    }
+} 
 
+playGame();
+
+if (humanScore > computerScore) {
+  console.log("You won the game!");
+} else if (computerScore > humanScore) {
+  console.log("Computer won the game!");
+} else {
+  console.log("It's a tie!");
+}
 
 
 
