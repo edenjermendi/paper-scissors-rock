@@ -9,8 +9,14 @@ if (randomNum <= 0.33) {
 } else {
     return "Rock";
 }
-}
+};
 
+function getHumanChoice() {
+    let humanChoice = prompt("Make your choice; rock, paper or scissors?");
+    return humanChoice;
+};
 
+const playerMove = getHumanChoice();
+console.log(playerMove); // You should see whatever you typed in the prompt
 
 
