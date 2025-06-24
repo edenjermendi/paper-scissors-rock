@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8ecff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid rgb(147, 147, 147);
+  border-radius: 8px;
+  width: 450px;
+  height: 300px;
+  align-items: center;
+  background-color: #f2c0fa;
+}
+
+h1 {
+  padding: 0 10px 10px 10px;
+  color: rgb(39, 39, 39);
+}
+
+.results {
+  border: none;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+}
+
+.buttons {
+  padding: 8px;
+}
+

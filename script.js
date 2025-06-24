@@ -42,13 +42,18 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-//advise user who won the game overall
-if (humanScore > computerScore) {
-  console.log("You won the game!");
-} else if (computerScore > humanScore) {
-  console.log("Computer won the game!");
-} else {
-  console.log("It's a tie! Refresh page to play again.");
+function updateResults(result) {
+    const resultsDiv = document.querySelector(".results");
+    resultsDiv.innerHTML = `
+        <p>${result}</p>
+        <p>Score: You ${humanScore} - Computer ${computerScore}</p>
+  `;
+
+    if (humanScore === 5 || computerScore === 5) {
+        const winner = humanScore === 5 ? "You" : "Computer";
+        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
+        document.querySelectorAll("button").forEach(button => button.disabled = true);
+  }
 }
 
 //addEventListeners for each button
@@ -57,66 +62,21 @@ if (humanScore > computerScore) {
 document.querySelector(".rock").addEventListener("click", () => {
     const computerChoice = getComputerChoice();
     const result = playRound("rock", computerChoice);
-
-    const resultsDiv = document.querySelector(".results");
-    resultsDiv.innerHTML = `
-    <p>${result}</p>
-    <p>Score: You ${humanScore} - Computer ${computerScore}</p>
-  `;
-
-    // CHECK FOR GAME END
-    if (humanScore === 5 || computerScore === 5) {
-        const winner = humanScore === 5 ? "You" : "Computer";
-        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
-
-    // Disable all buttons
-    document.querySelectorAll("button").forEach(button => button.disabled = true);
-  }
-
+    updateResults(result);
 });
 
 //paper button
 document.querySelector(".paper").addEventListener("click", () => {
     const computerChoice = getComputerChoice();
     const result = playRound("paper", computerChoice);
-
-    const resultsDiv = document.querySelector(".results");
-    resultsDiv.innerHTML = `
-    <p>${result}</p>
-    <p>Score: You ${humanScore} - Computer ${computerScore}</p>
-  `;
-
-    // CHECK FOR GAME END
-    if (humanScore === 5 || computerScore === 5) {
-        const winner = humanScore === 5 ? "You" : "Computer";
-        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
-
-    // Disable all buttons
-    document.querySelectorAll("button").forEach(button => button.disabled = true);
-  }
-
+    updateResults(result);
 });
 
 //scissors button
 document.querySelector(".scissors").addEventListener("click", () => {
     const computerChoice = getComputerChoice();
     const result = playRound("scissors", computerChoice);
-
-    const resultsDiv = document.querySelector(".results");
-    resultsDiv.innerHTML = `
-    <p>${result}</p>
-    <p>Score: You ${humanScore} - Computer ${computerScore}</p>
-  `;
-
-    // CHECK FOR GAME END
-    if (humanScore === 5 || computerScore === 5) {
-        const winner = humanScore === 5 ? "You" : "Computer";
-        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
-
-    // Disable all buttons
-    document.querySelectorAll("button").forEach(button => button.disabled = true);
-  }
-
+    updateResults(result);
 });
 
 
