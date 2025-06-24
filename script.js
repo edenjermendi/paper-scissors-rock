@@ -15,17 +15,6 @@ if (randomNum <= 0.33) {
 let humanScore = 0;
 let computerScore = 0;
 
-//Prompt user to input their choice and return in
-function getHumanChoice() {
-    let humanChoice = prompt("Make your choice; rock, paper or scissors?");
-    return humanChoice;
-};
-
-//Turns all user input to lower case
-function deCapitalize(humanChoice) {
-    return humanChoice.toLowerCase();
-}
-
 //Add function and logic for a single round
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
@@ -53,18 +42,6 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-//Add function and logic to play 5 rounds to make full game
-function playGame() {
-    for (let x = 0; x < 5; x++) {
-        let humanChoice = deCapitalize(getHumanChoice());
-        let computerChoice = getComputerChoice();
-        console.log(playRound(humanChoice, computerChoice));
-    }
-} 
-
-//call above function
-playGame();
-
 //advise user who won the game overall
 if (humanScore > computerScore) {
   console.log("You won the game!");
@@ -74,5 +51,72 @@ if (humanScore > computerScore) {
   console.log("It's a tie! Refresh page to play again.");
 }
 
+//addEventListeners for each button
+
+//rock button
+document.querySelector(".rock").addEventListener("click", () => {
+    const computerChoice = getComputerChoice();
+    const result = playRound("rock", computerChoice);
+
+    const resultsDiv = document.querySelector(".results");
+    resultsDiv.innerHTML = `
+    <p>${result}</p>
+    <p>Score: You ${humanScore} - Computer ${computerScore}</p>
+  `;
+
+    // CHECK FOR GAME END
+    if (humanScore === 5 || computerScore === 5) {
+        const winner = humanScore === 5 ? "You" : "Computer";
+        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
+
+    // Disable all buttons
+    document.querySelectorAll("button").forEach(button => button.disabled = true);
+  }
+
+});
+
+//paper button
+document.querySelector(".paper").addEventListener("click", () => {
+    const computerChoice = getComputerChoice();
+    const result = playRound("paper", computerChoice);
+
+    const resultsDiv = document.querySelector(".results");
+    resultsDiv.innerHTML = `
+    <p>${result}</p>
+    <p>Score: You ${humanScore} - Computer ${computerScore}</p>
+  `;
+
+    // CHECK FOR GAME END
+    if (humanScore === 5 || computerScore === 5) {
+        const winner = humanScore === 5 ? "You" : "Computer";
+        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
+
+    // Disable all buttons
+    document.querySelectorAll("button").forEach(button => button.disabled = true);
+  }
+
+});
+
+//scissors button
+document.querySelector(".scissors").addEventListener("click", () => {
+    const computerChoice = getComputerChoice();
+    const result = playRound("scissors", computerChoice);
+
+    const resultsDiv = document.querySelector(".results");
+    resultsDiv.innerHTML = `
+    <p>${result}</p>
+    <p>Score: You ${humanScore} - Computer ${computerScore}</p>
+  `;
+
+    // CHECK FOR GAME END
+    if (humanScore === 5 || computerScore === 5) {
+        const winner = humanScore === 5 ? "You" : "Computer";
+        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
+
+    // Disable all buttons
+    document.querySelectorAll("button").forEach(button => button.disabled = true);
+  }
+
+});
 
 
