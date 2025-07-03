@@ -13,7 +13,7 @@ This is a simple browser-based Rock Paper Scissors game built using HTML, CSS, a
 
 ## Screenshot
 
-![Screenshot of Rock Paper Scissors Game](./screenshot.png)
+![Screenshot of Rock Paper Scissors Game](./screenshot.jpg)
 
 ## How It Works
 
