@@ -1,38 +1,200 @@
+/* styles.css */
+
+/* ==== Design tokens ======================================================= */
+:root {
+  /* Palette: lavender/pink/blue + neutrals */
+  --bg-1: #f7f2ff;
+  /* page background (lavender) */
+  --bg-2: #ffffffcc;
+  /* glass card surface */
+  --bg-3: #ffffff;
+  /* inner panels */
+  --ink-1: #1f1f23;
+  /* primary text */
+  --ink-2: #4a4a55;
+  /* secondary text (slightly darker) */
+
+  /* Accent gradient (lavender → pink → blue) */
+  --grad-1: linear-gradient(135deg, #d8b4fe 0%, #f9a8d4 40%, #93c5fd 100%);
+
+  /* Accent solids for subtle borders/glow */
+  --accent-1: #a78bfa;
+  /* purple */
+  --accent-2: #f472b6;
+  /* pink */
+  --accent-3: #60a5fa;
+  /* blue */
+
+  /* Radius / shadows */
+  --radius-lg: 20px;
+  --radius-sm: 12px;
+  --shadow-1: 0 10px 30px rgba(35, 16, 56, 0.10);
+  --shadow-2: 0 6px 18px rgba(35, 16, 56, 0.12);
+  --ring: 0 0 0 3px color-mix(in oklab, var(--accent-1) 35%, white);
+
+  /* Type */
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Motion */
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --t-fast: 140ms;
+}
+
+/* ==== Base reset ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f8ecff;
+  height: 100%;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 2px solid rgb(147, 147, 147);
-  border-radius: 8px;
-  width: 450px;
-  height: 300px;
-  align-items: center;
-  background-color: #f2c0fa;
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink-1);
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(167, 139, 250, .25), transparent 60%),
+    radial-gradient(1000px 500px at 90% 30%, rgba(96, 165, 250, .20), transparent 60%),
+    var(--bg-1);
 }
 
-h1 {
-  padding: 0 10px 10px 10px;
-  color: rgb(39, 39, 39);
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==== Layout ============================================================= */
+.wrap {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 40px);
+}
+
+.card {
+  width: min(560px, 92vw);
+  background: var(--bg-2);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  border: 1px solid color-mix(in oklab, #fff 70%, var(--accent-1));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: clamp(20px, 4vw, 32px);
+}
+
+/* ==== Game UI ============================================================ */
+.title {
+  margin: 0 0 18px;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  line-height: 1.1;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  background: var(--grad-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
 }
 
 .results {
-  border: none;
-  width: 200px;
-  height: 100px;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: rgb(255, 255, 255);
+  background: var(--bg-3);
+  border: 1px solid color-mix(in oklab, #fff 60%, var(--accent-3));
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-2);
+  padding: 14px 16px;
+  min-height: 84px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--ink-2);
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
 }
 
+/* Buttons row */
 .buttons {
-  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
 }
 
+/* Shared button style */
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #0f172a;
+  background: linear-gradient(#ffffff, #f7f7ff) padding-box,
+    var(--grad-1) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 14px rgba(99, 102, 241, 0.18);
+  transition: transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    filter var(--t-fast) var(--ease);
+}
+
+.btn .emoji {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.24);
+}
+
+.btn:active {
+  transform: translateY(0);
+  filter: brightness(.97);
+}
+
+.btn:focus-visible {
+  outline: none;
+  position: relative;
+}
+
+.btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  box-shadow: var(--ring);
+}
+
+/* Per-button accent glow */
+.btn.paper {
+  box-shadow: 0 6px 14px rgba(167, 139, 250, .26);
+}
+
+.btn.scissors {
+  box-shadow: 0 6px 14px rgba(244, 114, 182, .26);
+}
+
+.btn.rock {
+  box-shadow: 0 6px 14px rgba(96, 165, 250, .26);
+}
+
+/* Small screens */
+@media (max-width: 420px) {
+  .buttons {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,23 +1,45 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Paper, Scissors, Rock Game. A sample project using HTML, CSS, and JS." />
-    <title>Paper, Scissors, Rock Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Paper, Scissors, Rock Game. A sample project using HTML, CSS, and JS."
+    />
+    <title>Paper • Scissors • Rock</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
-    <div class="container">
-      <h1>Paper, Scissors, Rock Game</h1>
-        <div class="results"></div>
-        <div class="buttons">
-          <button class="paper">Paper</button>
-          <button class="scissors">Scissors</button>
-          <button class="rock">Rock</button>
+    <main class="wrap">
+      <section
+        class="card game-card"
+        role="application"
+        aria-label="Paper Scissors Rock"
+      >
+        <h1 class="title">Paper • Scissors • Rock</h1>
+
+        <!-- Use aria-live so JS updates are announced to screen readers -->
+        <div class="results" aria-live="polite">
+          <!-- Your JS can inject round + score text here -->
         </div>
-    </div>
+
+        <div class="buttons" role="group" aria-label="Choose your move">
+          <button class="btn paper" aria-label="Choose Paper">
+            <span class="emoji">📄</span><span>Paper</span>
+          </button>
+          <button class="btn scissors" aria-label="Choose Scissors">
+            <span class="emoji">✂️</span><span>Scissors</span>
+          </button>
+          <button class="btn rock" aria-label="Choose Rock">
+            <span class="emoji">🪨</span><span>Rock</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
     <script src="script.js"></script>
   </body>
 </html>
