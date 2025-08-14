@@ -1,93 +1,77 @@
-// Randomly generated computer choice
 function getComputerChoice() {
     const randomNum = Math.random();
-    if (randomNum <= 0.33) {
-        return "paper";
-    } else if (randomNum <= 0.66) {
-        return "scissors";
-    } else {
-        return "rock";
-    }
+    if (randomNum <= 0.33) return "paper";
+    if (randomNum <= 0.66) return "scissors";
+    return "rock";
 }
 
-// Create variables to start both scores at 0
 let humanScore = 0;
 let computerScore = 0;
 
-// Add function and logic for a single round
 function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-        return "Round: It's a tie!";
-    } else if (humanChoice === "rock" && computerChoice === "paper") {
-        computerScore++;
-        return "Round: Computer wins!";
-    } else if (humanChoice === "rock" && computerChoice === "scissors") {
-        humanScore++;
-        return "Round: You win!";
-    } else if (humanChoice === "paper" && computerChoice === "rock") {
-        humanScore++;
-        return "Round: You win!";
-    } else if (humanChoice === "paper" && computerChoice === "scissors") {
-        computerScore++;
-        return "Round: Computer wins!";
-    } else if (humanChoice === "scissors" && computerChoice === "paper") {
-        humanScore++;
-        return "Round: You win!";
-    } else if (humanChoice === "scissors" && computerChoice === "rock") {
-        computerScore++;
-        return "Round: Computer wins!";
-    } else {
-        return "Try again..";
-    }
+    if (humanChoice === computerChoice) return "Round: It's a tie!";
+    if (humanChoice === "rock" && computerChoice === "paper") { computerScore++; return "Round: Computer wins!"; }
+    if (humanChoice === "rock" && computerChoice === "scissors") { humanScore++; return "Round: You win!"; }
+    if (humanChoice === "paper" && computerChoice === "rock") { humanScore++; return "Round: You win!"; }
+    if (humanChoice === "paper" && computerChoice === "scissors") { computerScore++; return "Round: Computer wins!"; }
+    if (humanChoice === "scissors" && computerChoice === "paper") { humanScore++; return "Round: You win!"; }
+    if (humanChoice === "scissors" && computerChoice === "rock") { computerScore++; return "Round: Computer wins!"; }
+    return "Try again..";
 }
 
 function updateResults(result) {
     const resultsDiv = document.querySelector(".results");
+
+    // Build inner content
     resultsDiv.innerHTML = `
-        <p>${result}</p>
-        <p>Score: You ${humanScore} - Computer ${computerScore}</p>
+        <div class="results-content">
+            <p>${result}</p>
+            <p>Score: You ${humanScore} - Computer ${computerScore}</p>
+        </div>
     `;
 
+    const content = resultsDiv.querySelector(".results-content");
+
+    // Trigger smooth animation
+    content.classList.remove("update");
+    void content.offsetWidth; // reflow
+    content.classList.add("update");
+
+    // End game check
     if (humanScore === 5 || computerScore === 5) {
         const winner = humanScore === 5 ? "You" : "Computer";
-        resultsDiv.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
-        
-        // Disable choice buttons
-        document.querySelectorAll(".paper, .scissors, .rock").forEach(button => button.disabled = true);
-        
-        // Create reset button
+        content.innerHTML += `<p><strong>${winner} won the game!</strong></p>`;
+
+        document.querySelectorAll(".paper, .scissors, .rock").forEach(btn => btn.disabled = true);
+
         const resetBtn = document.createElement("button");
         resetBtn.textContent = "Play Again";
-        resetBtn.classList.add("btn"); // match style
+        resetBtn.classList.add("btn");
         resetBtn.style.marginTop = "14px";
         resetBtn.addEventListener("click", resetGame);
-
-        resultsDiv.appendChild(resetBtn);
+        content.appendChild(resetBtn);
     }
 }
 
 function resetGame() {
     humanScore = 0;
     computerScore = 0;
-    document.querySelector(".results").innerHTML = `
-        <p>Game reset! Choose your move.</p>
-        <p>Score: You 0 - Computer 0</p>
+    const resultsDiv = document.querySelector(".results");
+    resultsDiv.innerHTML = `
+        <div class="results-content">
+            <p>Game reset! Choose your move.</p>
+            <p>Score: You 0 - Computer 0</p>
+        </div>
     `;
-    document.querySelectorAll(".paper, .scissors, .rock").forEach(button => button.disabled = false);
+    document.querySelectorAll(".paper, .scissors, .rock").forEach(btn => btn.disabled = false);
 }
 
-// Event listeners
 document.querySelector(".rock").addEventListener("click", () => {
-    const result = playRound("rock", getComputerChoice());
-    updateResults(result);
+    updateResults(playRound("rock", getComputerChoice()));
 });
-
 document.querySelector(".paper").addEventListener("click", () => {
-    const result = playRound("paper", getComputerChoice());
-    updateResults(result);
+    updateResults(playRound("paper", getComputerChoice()));
 });
-
 document.querySelector(".scissors").addEventListener("click", () => {
-    const result = playRound("scissors", getComputerChoice());
-    updateResults(result);
+    updateResults(playRound("scissors", getComputerChoice()));
 });

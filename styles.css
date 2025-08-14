@@ -1,43 +1,22 @@
-/* styles.css */
-
 /* ==== Design tokens ======================================================= */
 :root {
-  /* Palette: lavender/pink/blue + neutrals */
   --bg-1: #f7f2ff;
-  /* page background (lavender) */
   --bg-2: #ffffffcc;
-  /* glass card surface */
   --bg-3: #ffffff;
-  /* inner panels */
   --ink-1: #1f1f23;
-  /* primary text */
   --ink-2: #4a4a55;
-  /* secondary text (slightly darker) */
-
-  /* Accent gradient (lavender → pink → blue) */
   --grad-1: linear-gradient(135deg, #d8b4fe 0%, #f9a8d4 40%, #93c5fd 100%);
-
-  /* Accent solids for subtle borders/glow */
   --accent-1: #a78bfa;
-  /* purple */
   --accent-2: #f472b6;
-  /* pink */
   --accent-3: #60a5fa;
-  /* blue */
-
-  /* Radius / shadows */
   --radius-lg: 20px;
   --radius-sm: 12px;
   --shadow-1: 0 10px 30px rgba(35, 16, 56, 0.10);
   --shadow-2: 0 6px 18px rgba(35, 16, 56, 0.12);
   --ring: 0 0 0 3px color-mix(in oklab, var(--accent-1) 35%, white);
-
-  /* Type */
   --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
     "Noto Sans", "Liberation Sans", Arial, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-  /* Motion */
   --ease: cubic-bezier(.22, .61, .36, 1);
   --t-fast: 140ms;
 }
@@ -64,7 +43,6 @@ body {
     var(--bg-1);
 }
 
-/* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
@@ -112,12 +90,22 @@ body {
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-2);
   padding: 14px 16px;
-  min-height: 84px;
+  min-height: 110px;
+  /* keeps height stable */
   display: grid;
   place-items: center;
   text-align: center;
   color: var(--ink-2);
   font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+}
+
+.results-content {
+  transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+}
+
+.results-content.update {
+  transform: scale(1.05);
+  opacity: 0.85;
 }
 
 /* Buttons row */
@@ -128,7 +116,6 @@ body {
   margin-top: 18px;
 }
 
-/* Shared button style */
 .btn {
   appearance: none;
   border: 0;
@@ -179,7 +166,6 @@ body {
   box-shadow: var(--ring);
 }
 
-/* Per-button accent glow */
 .btn.paper {
   box-shadow: 0 6px 14px rgba(167, 139, 250, .26);
 }
@@ -192,7 +178,6 @@ body {
   box-shadow: 0 6px 14px rgba(96, 165, 250, .26);
 }
 
-/* Small screens */
 @media (max-width: 420px) {
   .buttons {
     grid-template-columns: 1fr;
